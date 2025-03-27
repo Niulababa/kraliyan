@@ -1,0 +1,108 @@
+<!DOCTYPE html>  
+<html lang="tr">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>kraliyan</title>  
+    <style>  
+        body {  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            height: 100vh;  
+            margin: 0;  
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Lüks arka plan */  
+            font-family: 'Arial', sans-serif;  
+            overflow: hidden; /* Taşmayı önler */  
+        }  
+        .image-container {  
+            position: absolute;  
+            top: 50%;  
+            left: 50%;  
+            transform: translate(-50%, -50%);  
+            display: flex;  
+            justify-content: space-between;  
+            width: 80vw; /* Ekranın %80 genişliği */  
+            height: 50vh; /* Ekranın %50 yüksekliği */  
+            z-index: 1; /* Resimler ön planda */  
+        }  
+        .dancing-image {  
+            width: 200px; /* Resmin boyutu */  
+            height: auto; /* Yüksekliği otomatik ayarlama */  
+        }  
+        @keyframes dance {  
+            0% {  
+                transform: scale(1) rotate(0deg);  
+            }  
+            25% {  
+                transform: scale(1.5) rotate(20deg); /* Sağ yatar */  
+            }  
+            50% {  
+                transform: scale(1.5) rotate(-20deg); /* Sol yatar */  
+            }  
+            75% {  
+                transform: scale(1.5) rotate(20deg); /* Sağ yatar */  
+            }  
+            100% {  
+                transform: scale(1) rotate(0deg); /* Başlangıç durumuna dön */  
+            }  
+        }  
+        .button-container {  
+            position: relative;  
+            z-index: 2; /* Buton önde */  
+        }  
+        .clickable {  
+            padding: 20px;  
+            background-color: #f39c12; /* Lüks altın rengi */  
+            color: white;  
+            border: none;  
+            border-radius: 50%; /* Yuvarlak buton */  
+            cursor: pointer;  
+            font-size: 18px; /* Yazının boyutu */  
+            text-align: center;  
+            width: 200px; /* Buton genişliği */  
+            height: 200px; /* Buton yüksekliği */  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Gölgelendirme */  
+            transition: transform 0.3s; /* Hover efekti için geçiş */  
+        }  
+        .clickable:hover {  
+            transform: scale(1.05); /* Hover animasyonu */  
+        }  
+    </style>  
+</head>  
+<body>  
+
+    <div class="image-container" id="image-container">  
+        <img class="dancing-image" src="site/kraliyan.png" alt="Kraliçe Sol" id="left-image">  
+        <img class="dancing-image" src="site/kraliyan.png" alt="Kraliçe Sağ" id="right-image">  
+    </div>  
+    
+    <div class="button-container">  
+        <button class="clickable" onclick="startDance()">Kraliyanı Seviyorsan Bas</button>  
+    </div>  
+
+    <audio id="audio" src="site/gemi2.mp3" preload="auto"></audio>  
+
+    <script>  
+        function startDance() {  
+            const leftImage = document.getElementById("left-image");  
+            const rightImage = document.getElementById("right-image");  
+            const audio = document.getElementById("audio");  
+
+            // Her iki resme dans animasyonunu uygula  
+            leftImage.style.animation = 'dance 2s ease-in-out infinite'; // Sonsuz döngü  
+            rightImage.style.animation = 'dance 2s ease-in-out infinite'; // Sonsuz döngü  
+
+            // Müzik çalmaya başla  
+            audio.play()  
+                .catch(error => {  
+                    console.log("Müziği çalamadı:", error);  
+                });  
+        }  
+    </script>  
+
+</body>  
+</html>  
